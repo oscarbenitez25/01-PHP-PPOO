@@ -50,4 +50,4 @@ Obre <http://localhost:8000/index.php>. Requereix PHP 8.0 o superior.
 - Totes les sortides s'escapen amb `htmlspecialchars` (funció `e()`); tema clar/fosc automàtic.
 
 ## Vídeo de demostració
-🎬 **Link:** _(afegeix aquí l'enllaç de YouTube no llistat o Google Drive)_
+🎬 **Link:** https://drive.google.com/file/d/1gF9fxH76XVv_7WTE_mswWqof0TjXZFk5/view?usp=drive_link

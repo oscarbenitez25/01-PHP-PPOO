@@ -42,11 +42,13 @@ class Biblioteca
 
     // ---------------- Materials ----------------
 
+    /** Afegeix un material, indexat pel seu ID. */
     public function afegirMaterial(Material $material): void
     {
         $this->materials[$material->getId()] = $material;
     }
 
+    /** Elimina un material per ID. Retorna false si no existeix. */
     public function eliminarMaterial(int $id): bool
     {
         if (!isset($this->materials[$id])) {
@@ -56,11 +58,13 @@ class Biblioteca
         return true;
     }
 
+    /** Retorna el material amb aquest ID, o null si no existeix. */
     public function cercarPerId(int $id): ?Material
     {
         return $this->materials[$id] ?? null;
     }
 
+    /** Materials el títol dels quals conté el text (sense distingir majúscules). */
     public function cercarPerTitol(string $titol): array
     {
         return array_values(array_filter(
@@ -69,6 +73,7 @@ class Biblioteca
         ));
     }
 
+    /** Materials l'autor dels quals conté el text (sense distingir majúscules). */
     public function cercarPerAutor(string $autor): array
     {
         return array_values(array_filter(
@@ -79,21 +84,25 @@ class Biblioteca
 
     // ---------------- Llistats ----------------
 
+    /** Materials que no estan prestats. */
     public function llistarDisponibles(): array
     {
         return array_values(array_filter($this->materials, fn(Material $m) => $m->isDisponible()));
     }
 
+    /** Materials que estan prestats ara mateix. */
     public function llistarPrestats(): array
     {
         return array_values(array_filter($this->materials, fn(Material $m) => !$m->isDisponible()));
     }
 
+    /** Materials d'un tipus: "Llibre", "Revista" o "DVD". */
     public function llistarPerTipus(string $tipus): array
     {
         return array_values(array_filter($this->materials, fn(Material $m) => $m->getTipus() === $tipus));
     }
 
+    /** Préstecs sense data de retorn. */
     public function llistarPrestecsActius(): array
     {
         return array_values(array_filter($this->prestecs, fn(Prestec $p) => $p->estaActiu()));
@@ -108,6 +117,7 @@ class Biblioteca
         ));
     }
 
+    /** Tots els préstecs d'un usuari, actius i retornats. */
     public function llistarPrestecsUsuari(int $usuariId): array
     {
         return array_values(array_filter(
@@ -118,6 +128,7 @@ class Biblioteca
 
     // ---------------- Usuaris ----------------
 
+    /** Afegeix un usuari, indexat pel seu ID. */
     public function afegirUsuari(Usuari $usuari): void
     {
         $this->usuaris[$usuari->id] = $usuari;
@@ -223,6 +234,7 @@ class Biblioteca
 
     // ---------------- Estadístiques ----------------
 
+    /** Resum del sistema: totals, per tipus, reservats i multes dels préstecs actius. */
     public function obtenirEstadistiques(): array
     {
         $perTipus = ['Llibre' => 0, 'Revista' => 0, 'DVD' => 0];

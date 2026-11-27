@@ -27,6 +27,7 @@ class Prestec
         $this->dataRetorn = new DateTime();
     }
 
+    /** True si el material encara no s'ha retornat. */
     public function estaActiu(): bool
     {
         return $this->dataRetorn === null;
@@ -51,6 +52,7 @@ class Prestec
         return $this->material->calcularMulta($this->calcularDiesRetard());
     }
 
+    /** True si s'ha passat el límit de dies del préstec. */
     public function estaVencut(): bool
     {
         return $this->calcularDiesRetard() > 0;

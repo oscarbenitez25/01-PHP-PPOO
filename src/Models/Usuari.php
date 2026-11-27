@@ -72,11 +72,13 @@ class Usuari
         return "{$this->nom} <{$this->email}> - $n " . ($n === 1 ? 'préstec' : 'préstecs');
     }
 
+    /** Registra que l'usuari té aquest material en préstec. */
     public function afegirPrestec(Material $material): void
     {
         $this->materialsPrestats[$material->getId()] = $material;
     }
 
+    /** Treu el material de la llista de préstecs de l'usuari. */
     public function eliminarPrestec(int $materialId): void
     {
         unset($this->materialsPrestats[$materialId]);
@@ -92,6 +94,7 @@ class Usuari
         return count($this->materialsPrestats);
     }
 
+    /** Guarda un missatge temporal per mostrar a la web. */
     public function afegirNotificacio(string $missatge): void
     {
         $this->notificacions[] = $missatge;
@@ -105,6 +108,7 @@ class Usuari
         return $n;
     }
 
+    /** Comprova que l'email tingui un format vàlid. */
     private function validarEmail(string $email): bool
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
